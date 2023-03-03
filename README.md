@@ -24,5 +24,5 @@
 
 <h2>Dependencies</h2>
 <ol>
-  <li><a href="https://versionsof.net/standard/2.2">.Net Standard 2.2</a></li>
+  <li><a href="https://versionsof.net/core/3.0">.Net Core >= 3.0</a> or <a href="https://versionsof.net/mono/6.4">.Net Mono 6.4</a></li>
 </ol>
