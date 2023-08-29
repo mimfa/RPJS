@@ -236,7 +236,6 @@ namespace MiMFa.RP.CSharp
             return this;
         }
 
-
         public virtual ARPBase All()=> new ARPBase(this, true);
         public virtual ARPBase One()=> new ARPBase(this, false);
         public virtual ARPBase The(int index = 0)=> All().On("["+ index + "]");
