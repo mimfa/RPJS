@@ -86,6 +86,7 @@ namespace MiMFa.RP.CSharp.JS
         public override ARPBase First()=> All().On("[0]");
         public override ARPBase Last()=> All().On(".slice(-1).pop()");
         public override ARPBase Reverse() => On(".reverse()");
+        public override ARPBase Slice(int index = 0, int? length = null) => On(".slice(" + index + (length == null ? ")" : $", {length})"));
 
         public override ARPBase On(string nextCode) => Format("{0}{1}", nextCode);
 
@@ -173,7 +174,15 @@ namespace MiMFa.RP.CSharp.JS
 
         public override ARPBase SendKeys(string keys) => Scroll().Follows(InvokeKeyboardEvent(keys, "keydown"));
         public override ARPBase SendText(string text) => Scroll().Follows(InvokeKeyboardEvent(Service.ToHotKeys(text), "keydown"));
-        public override ARPBase Scroll() => On(".scrollIntoView({ behavior: 'smooth', block: 'end'})"); 
+        public override ARPBase Scroll() => On(".scrollIntoView({ behavior: 'smooth', block: 'end'})");
+        public override ARPBase ScrollX(ARPBase pointer) => On(".scrollLeft").Set(pointer.Clone().PositionX());
+        public override ARPBase ScrollX(string code) => On(".scrollLeft").Set(code);
+        public override ARPBase ScrollX(int x) => On(".scrollLeft").Set(x);
+        public override ARPBase ScrollY(ARPBase pointer) => On(".scrollTop").Set(pointer.Clone().PositionY());
+        public override ARPBase ScrollY(string code) => On(".scrollTop").Set(code);
+        public override ARPBase ScrollY(int y) => On(".scrollTop").Set(y);
+        public override ARPBase PositionX() => On(".offsetLeft");
+        public override ARPBase PositionY() => On(".offsetTop");
         public override ARPBase Flow() => On(".blur()");
         public override ARPBase Focus() => On(".focus()");
         public override ARPBase Submit() => Scroll().Follows(On(".submit()"));

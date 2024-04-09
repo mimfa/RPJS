@@ -242,6 +242,7 @@ namespace MiMFa.RP.CSharp
         public virtual ARPBase First()=> All().On("[0]");
         public virtual ARPBase Last()=> All().On(".slice(-1).pop()");
         public virtual ARPBase Reverse() => On(".reverse()");
+        public virtual ARPBase Slice(int index = 0, int? length = null) => On(".slice(" + index + (length == null ? ")" : $", {length})"));
 
         public ARPBase On(ARPBase nextPointer) => On(nextPointer.ToString());
         public virtual ARPBase On(string nextCode) => Format("{0}{1}", nextCode);
@@ -355,7 +356,19 @@ namespace MiMFa.RP.CSharp
 
         public virtual ARPBase SendKeys(string keys) => Scroll().Follows(InvokeKeyboardEvent(keys, "keydown"));
         public virtual ARPBase SendText(string text) => Scroll().Follows(InvokeKeyboardEvent(Service.ToHotKeys(text), "keydown"));
-        public virtual ARPBase Scroll() => On(".scrollIntoView({ behavior: 'smooth', block: 'end'})"); 
+        public virtual ARPBase Scroll() => On(".scrollIntoView({ behavior: 'smooth', block: 'end'})");
+        public virtual ARPBase ScrollTo(ARPBase pointer) => ScrollX(pointer).Follows(ScrollY(pointer));
+        public virtual ARPBase ScrollTo(string codeX, string codeY) => ScrollX(codeX).Follows(ScrollY(codeY));
+        public virtual ARPBase ScrollTo(int x, int y) => ScrollX(x).Follows(ScrollY(y));
+        public virtual ARPBase ScrollX(ARPBase pointer) => On(".scrollLeft").Set(pointer.Clone().PositionX());
+        public virtual ARPBase ScrollX(string code) => On(".scrollLeft").Set(code);
+        public virtual ARPBase ScrollX(int x) => On(".scrollLeft").Set(x);
+        public virtual ARPBase ScrollY(ARPBase pointer) => On(".scrollTop").Set(pointer.Clone().PositionY());
+        public virtual ARPBase ScrollY(string code) => On(".scrollTop").Set(code);
+        public virtual ARPBase ScrollY(int y) => On(".scrollTop").Set(y);
+        public virtual ARPBase Position() => PositionX().Join(PositionY()).Array();
+        public virtual ARPBase PositionX() => On(".offsetLeft");
+        public virtual ARPBase PositionY() => On(".offsetTop");
         public virtual ARPBase Flow() => On(".blur()");
         public virtual ARPBase Focus() => On(".focus()");
         public virtual ARPBase Submit() => Scroll().Follows(On(".submit()"));
