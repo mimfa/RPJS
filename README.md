@@ -1,6 +1,6 @@
 <h1 align="center">
 	<a href="https://rp.mimfa.net" target="_blank">
-		<img alt="MiMFa RP" width="20%" src="https://rp.mimfa.net/file/logo/logo.png"/>
+		<img alt="MiMFa RP" width="20%" src="https://rp.mimfa.net/asset/logo/logo.png"/>
 		<br>
 		<a href="https://github.com/mimfa">MiMFa</a> <a href="https://github.com/mimfa/RP">RP</a>
 	</a>
